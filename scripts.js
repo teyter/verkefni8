@@ -29,13 +29,38 @@ const text = (() => {
         button.addEventListener('click',deleteItem);//??
     }
 /*daematimi*/
+
     // TODO láta hluti í _items virka
   }
 
   function formHandler(e) {
     e.preventDefault();
 
-    console.log('halló heimur');
+    let input = document.querySelector('.form__input').value;
+
+    let li = document.createElement('hi');
+    li.className = 'item';
+
+    let content = document.createElement('input');
+    content.type = 'checkbox';
+    content.className = 'item__checkbox';
+
+    let span = document.createElement('span');
+
+    span.className = 'item__text';
+    span.appendChild(document.createTextNode(input));
+
+    let button = document.createElement('button');
+    button.appendChild(document.createTextNode('Eyða'));
+    button.className = 'item__button';
+
+    li.appendChild(content);
+    li.appendChild(span);
+    li.appendChild(button);
+
+    let giraffe = document.querySelector('.items');
+    giraffe.appendChild(li);
+
   }
 
   // event handler fyrir það að klára færslu
@@ -51,11 +76,11 @@ const text = (() => {
 
     parentNode.removeChild(target);
     
-    //let input = el('input','item__edit');
-    let input = document.createElement('input');
+    let input = el('input','item__edit');
+    //let input = document.createElement('input');
     input.classList.add('item__edit');
     input.addEventListener('keyup', commit);
-    input.setAttrubute('type', 'text');
+    input.setAttribute('type', 'text');
 
     const button = parentNode.querySelector('item__button');
     parentNode.insertBefore(input, button);
@@ -81,7 +106,7 @@ const text = (() => {
     const { target } = e;
     const parent = target.parentNode;
     let checkbox = parent.querySelector('.item__checkbox');
-    checkbox.removeEventListener('click'.finish);
+    checkbox.removeEventListener('click',finish);
 
     parent.parentNode.removeChild(parent);
     
@@ -91,10 +116,9 @@ const text = (() => {
   function el(type, className, clickHandler) {
         // bua til div
       let div = document.createElement('div');
-
       // gefa class
       div.classList.add('container');
-      div.addEventListener('click'.add);
+      div.addEventListener('click',add);
 
       return div;
   }
