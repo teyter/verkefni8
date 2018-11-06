@@ -26,7 +26,7 @@ const text = (() => {
 
         checkbox.addEventListener('click',finish);
         text.addEventListener('click',edit);
-        button.addEventListener('click',deleteItem);//??
+        button.addEventListener('click',deleteItem);
     }
 /*daematimi*/
 
@@ -35,10 +35,17 @@ const text = (() => {
 
   function formHandler(e) {
     e.preventDefault();
+    
+    add(document.querySelector('.form__input').value);
 
+    for (let item of items.querySelectorAll('item__checkbox')) {
+        item.addEventListener('click', finish);
+    }
+
+      console.log('ratata');
     let input = document.querySelector('.form__input').value;
 
-    let li = document.createElement('hi');
+    let li = document.createElement('li');
     li.className = 'item';
 
     let content = document.createElement('input');
@@ -58,15 +65,22 @@ const text = (() => {
     li.appendChild(span);
     li.appendChild(button);
 
-    let giraffe = document.querySelector('.items');
-    giraffe.appendChild(li);
+    let gonkdroid = document.querySelector('.items');
+    gonkdroid.appendChild(li);
 
+    button.addEventListener('click', deleteItem);
+    e.target.reset();
   }
 
   // event handler fyrir það að klára færslu
   function finish(e) {
-      console.log('finish'); // eyda svo
       const {target} = e;
+      if (e.target.checked) {
+          e.target.parentNode.classList.add('item--done');
+      } else {
+          e.target.parentNode.classList.remove('item--done');
+      }
+      console.log('finish'); 
   }
 
   // event handler fyrir það að breyta færslu
@@ -76,8 +90,8 @@ const text = (() => {
 
     parentNode.removeChild(target);
     
-    let input = el('input','item__edit');
-    //let input = document.createElement('input');
+    //let input = el('input','item__edit');
+    let input = document.createElement('input');
     input.classList.add('item__edit');
     input.addEventListener('keyup', commit);
     input.setAttribute('type', 'text');
@@ -87,18 +101,46 @@ const text = (() => {
     input.value = textContent;
 
     input.focus();
+
   }
 
   // event handler fyrir það að klára að breyta færslu
   function commit(e) {
       const {keyCode} = e;
-      if (keyCode === ENTER_KEYCODE) {
+      if (keyCode == ENTER_KEYCODE) {
         console.log('Enter was pressed');
       }
   }
 
   // fall sem sér um að bæta við nýju item
   function add(value) {
+/*
+      let input = value;
+
+      let li = document.createElement('li');
+      li.className = 'item';
+
+      let content = document.createElement('input');
+      content.type = 'checkbox';
+      content.className = 'item__checkbox';
+
+      let span = document.createElement('span');
+      span.className = 'item__text';
+      span.appendChild(document.createTextNode(input));
+
+      let button = document.createElement('button');
+      button.appendChild(document.createTextNode('Eyda'));
+      button.className = 'item__button';
+
+      li.appendChild(content);
+      li.appendChild(span);
+      li.appendChild(button);
+
+      items.appendChild(li);
+
+      console.log(input);
+*/
+      
   }
 
   // event handler til að eyða færslu
